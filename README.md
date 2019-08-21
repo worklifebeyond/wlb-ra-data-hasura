@@ -18,3 +18,8 @@ So, instead of `update` only `biography` field, it actually updates whole fields
 See [this issue](https://github.com/marmelab/react-admin/issues/2414#issuecomment-428945402) for details. 
 
 To achieve this if you want to send only the values that changes to your `hasura engine`, you need to compute the diff in the `dataProvider` and send only this diff.
+
+
+### Instalation
+
+>npm i ra-data-hasura-wlb --save
