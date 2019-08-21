@@ -49,4 +49,4 @@ const bulkQuery = {
     }
   };
   
-  export { bulkQuery, selectQuery, countQuery, insertQuery, updateQuery, deleteQuery };
+  module.exports = { bulkQuery, selectQuery, countQuery, insertQuery, updateQuery, deleteQuery };

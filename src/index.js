@@ -1,11 +1,11 @@
-import {
+const {
     bulkQuery,
     selectQuery,
     countQuery,
     insertQuery,
     updateQuery,
     deleteQuery
-  } from './queries';
+  } = require ('./queries');
   
   const DEFAULT_PRIMARY_KEY = 'id';
   
@@ -13,7 +13,7 @@ import {
     return JSON.parse(JSON.stringify(query));
   };
   
-  export default (serverEndpoint, headers, config) => {
+  module.exports = (serverEndpoint, headers, config) => {
   
     const getTableSchema = (resource) => {
       let tableName;
