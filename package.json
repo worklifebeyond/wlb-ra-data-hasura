@@ -3,7 +3,10 @@
   "version": "0.0.6",
   "description": "react-admin data provider for Hasura GraphQL Engine",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "build": "webpack --env dev && webpack --env build",
+    "dev": "webpack --progress --colors --watch --env dev"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/worklifebeyond/wlb-ra-data-hasura"
