@@ -1,6 +1,6 @@
 {
   "name": "ra-data-hasura-wlb",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "react-admin data provider for Hasura GraphQL Engine",
   "main": "./src/index.js",
   "scripts": {

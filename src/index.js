@@ -107,7 +107,9 @@ module.exports = (serverEndpoint, headers, config) => {
                 };
                 ;
                 finalCountQuery.args.where = {};
-                finalCountQuery.args.where[primaryKey] = { '$ne': null };
+                if(!params.filter){
+                    finalCountQuery.args.where[primaryKey] = { '$ne': null };
+                }
                 finalCountQuery.args.where = addFilters(finalCountQuery.args.where, params.filter);
                 finalQuery = cloneQuery(bulkQuery);
                 finalQuery.args.push(finalSelectQuery);
