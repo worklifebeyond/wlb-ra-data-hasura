@@ -139,6 +139,10 @@ module.exports = (serverEndpoint, headers, config) => {
             case 'UPDATE':
                 // update one
                 const updateFields = Object.keys(params.data);
+                // remove id from returning if PK != id
+                if(primaryKey !== 'id'){
+                    delete updateFields['id']
+                }
                 let updatedData = {};
 
                 Object.keys(params.data).map((keyName, keyIndex) => {
