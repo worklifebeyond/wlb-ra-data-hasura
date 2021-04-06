@@ -138,10 +138,10 @@ module.exports = (serverEndpoint, headers, config) => {
                 break;
             case 'UPDATE':
                 // update one
-                const updateFields = Object.keys(params.data);
+                let updateFields = Object.keys(params.data);
                 // remove id from returning if PK != id
-                if(primaryKey !== 'id'){
-                    delete updateFields['id']
+                if (primaryKey !== 'id') {
+                    updateFields = updateFields.filter(e => e !== 'id')
                 }
                 let updatedData = {};
 
@@ -260,7 +260,10 @@ module.exports = (serverEndpoint, headers, config) => {
     const convertHTTPResponse = (response, type, resource, params) => {
         // handle errors and throw with the message
         if ('error' in response || 'code' in response) {
-            throw new Error(JSON.stringify(response));
+            // throw new Error(JSON.stringify(response));
+            const code = 500;
+            const errorObj = { status: code, message: response['error'], json: response };
+            throw errorObj;
         }
         const primaryKey = getPrimaryKey(resource);
 
@@ -270,7 +273,15 @@ module.exports = (serverEndpoint, headers, config) => {
                     res[DEFAULT_PRIMARY_KEY] = res[primaryKey];
                 });
             } else {
-                response[0][DEFAULT_PRIMARY_KEY] = response[0][primaryKey];
+                try {
+                    response[0][DEFAULT_PRIMARY_KEY] = response[0][primaryKey];
+                } catch (error) {
+                    response.returning[0][DEFAULT_PRIMARY_KEY] = response.returning[0][primaryKey];
+                    //const code = 500;
+                    //const errorObj = { status: code, message: error.toString(), json: response };
+                    //throw errorObj;
+                }
+
             }
         }
         switch (type) {
@@ -341,5 +352,6 @@ module.exports = (serverEndpoint, headers, config) => {
                         return convertHTTPResponse(data, type, resource, params);
                     });
             });
+
     };
 };
